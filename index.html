@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +20,7 @@
         // Navigate to login if not authenticated
         document.addEventListener("DOMContentLoaded", function() {
             if (!localStorage.getItem('currentUser')) {
-                window.location.href = 'login.html';
+                showSection('admin-login-section');
             } else {
                 showSection('home-section'); // Show home section by default
             }
