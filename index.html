@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to show the specified section and hide others
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.main-content > section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.style.display = 'block';
+            }
+        }
+
+        // Navigate to login if not authenticated
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem('currentUser')) {
+                window.location.href = 'login.html';
+            } else {
+                showSection('home-section'); // Show home section by default
+            }
+
+            // Check if admin is logged in
+            if (localStorage.getItem('adminLoggedIn')) {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'block';
+            }
+        });
+
+        // Function to handle admin login
+        function adminLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check credentials
+            if (username === 'pratap' && password === 'pratap1') {
+                localStorage.setItem('adminLoggedIn', true);
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert('Incorrect username or password');
+            }
+        }
+
+        // Function to logout admin
+        function adminLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>PRATAP</h1>
+            <p>Home Furnishings & Comfort</p>
+        </div>
+        <nav class="nav">
+            <a href="#" onclick="showSection('home-section')">Home</a>
+            <a href="#" onclick="showSection('sleepwell-section')">Sleepwell</a>
+            <a href="#" onclick="showSection('kingcoil-section')">Kingcoil</a>
+            <a href="#">Duroflex</a>
+            <a href="#">Spaces</a>
+        </nav>
+        <div class="contact">
+            <p>Leading Supplier In India</p>
+            <p>Contact: +91 1234567890 | xyz@gmail.com</p>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products">
+            <button class="cart-button">
+                <img src="shoppingcart.png" alt="Cart">
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home-section">
+            <div class="banner">
+                <img src="homepageimage.jpg" alt="Banner Image">
+                <div class="banner-text">
+                    <h2>Dream Better. Sleep Better. Wake Refreshed</h2>
+                    <p>Looking for a personalized sleep experience? Customize your own mattress to perfectly suit your comfort and support needs!</p>
+                    <button class="customize-button">CUSTOMIZE NOW!</button>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-item">
+                    <h3>STORE LOCATOR</h3>
+                    <p>NAGPUR<br>DELHI<br>KOCHI<br>HYDERABAD<br>KERALA</p>
+                </div>
+                <div class="info-item">
+                    <h3>BROWSE PRODUCTS</h3>
+                    <p>Browse our range of Premium Mattresses Customized for your liking!</p>
+                </div>
+            </div>
+            <div class="highlights">
+                <div class="highlight-item">
+                    <img src="pricetag.png" alt="Lowest Prices">
+                    <p>LOWEST PRICES<br>We price match!</p>
+                </div>
+                <div class="highlight-item">
+                    <img src="medal.png" alt="Customer Rating">
+                    <p>Customer Rating<br>Customers' favorite since 2013!</p>
+                </div>
+                <div class="highlight-item">
+                    <img src="trolley.png" alt="Great Selection">
+                    <p>Great Selection<br>Customize your mattress!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sleepwell Section -->
+        <section id="sleepwell-section" style="display: none;">
+            <div class="banner">
+                <img src="path/to/banner-image.jpg" alt="Banner">
+                <div class="banner-text">
+                    <p>Not every mattress is for you!</p>
+                </div>
+            </div>
+            <div class="filters">
+                <div class="price-range">
+                    <label>Price Range</label>
+                    <input type="text" placeholder="4500">
+                    <input type="text" placeholder="100000">
+                    <input type="range" min="4500" max="100000" step="500" value="50000">
+                </div>
+                <div class="shop-by-need">
+                    <label>Shop by need</label>
+                    <button>Cozy & snug</button>
+                    <button>No partner disturbance</button>
+                    <button>Multi activity</button>
+                    <button>Back support</button>
+                    <button>Reversible</button>
+                </div>
+            </div>
+            <div class="product-list">
+                <div class="product-item">
+                    <img src="path/to/product1.jpg" alt="Ortho Pro Profiled Mattress">
+                    <h3>Ortho Pro Profiled Mattress</h3>
+                    <p>From MRP ₹6,839.00 ₹8,046.00 (upto 31% off)<br>(Incl. of all taxes)</p>
+                    <button class="compare-button">Compare</button>
+                    <button class="view-button">👁️</button>
+                </div>
+                <div class="product-item">
+                    <img src="path/to/product2.jpg" alt="Ortho Mattress">
+                    <h3>Ortho Mattress</h3>
+                    <p>From MRP ₹5,643.00 ₹5,940.00 (upto 30% off)<br>(Incl. of all taxes)</p>
+                    <button class="compare-button">Compare</button>
+                    <button class="view-button">👁️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kingcoil Section -->
+        <section id="kingcoil-section" style="display: none;">
+            <div class="banner">
+                <img src="Kingcoil.jpg" alt="Kingcoil">
+                <div class="banner-text">
+                    <p>Discover the Kingcoil collection!</p>
+                </div>
+            </div>
+            <div class="filters">
+                <div class="price-range">
+                    <label>Price Range</label>
+                    <input type="text" placeholder="4500">
+                    <input type="text" placeholder="100000">
+                    <input type="range" min="4500" max="100000" step="500" value="50000">
+                </div>
+                <div class="shop-by-need">
+                    <label>Shop by need</label>
+                    <button>Cozy & snug</button>
+                    <button>No partner disturbance</button>
+                    <button>Multi activity</button>
+                    <button>Back support</button>
+                    <button>Reversible</button>
+                </div>
+            </div>
+            <div class="product-list">
+                <div class="product-item">
+                    <img src="path/to/product1.jpg" alt="Ortho Pro Profiled Mattress">
+                    <h3>Ortho Pro Profiled Mattress</h3>
+                    <p>From MRP ₹6,839.00 ₹8,046.00 (upto 31% off)<br>(Incl. of all taxes)</p>
+                    <button class="compare-button">Compare</button>
+                    <button class="view-button">👁️</button>
+                </div>
+                <div class="product-item">
+                    <img src="path/to/product2.jpg" alt="Ortho Mattress">
+                    <h3>Ortho Mattress</h3>
+                    <p>From MRP ₹5,643.00 ₹5,940.00 (upto 30% off)<br>(Incl. of all taxes)</p>
+                    <button class="compare-button">Compare</button>
+                    <button class="view-button">👁️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Login Section -->
+        <section id="admin-login-section" style="display: none;">
+            <form id="login-form" onsubmit="adminLogin(event)">
+                <h2>Admin Login</h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit">Login</button>
+            </form>
+            <div id="success-message" style="display: none;">
+                <h2>Successfully logged in!</h2>
+                <button onclick="adminLogout()">Logout</button>
+            </div>
+            <div id="admin-panel" style="display: none;">
+                <h2>Admin Panel</h2>
+                <p>Welcome to the admin panel. Here you can manage the store.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 PRATAP Home Furnishings & Comfort. All rights reserved.</p>
+        <a href="#" onclick="showSection('admin-login-section')" class="admin-login">Admin Login</a>
+    </footer>
+</body>
+</html>
